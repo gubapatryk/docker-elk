@@ -1,3 +1,31 @@
+## tl;dr for Mikrotik Netflow configuration
+
+Set license to basic at elasticsearch/config/elasticsearch.yml
+```yml
+xpack.license.self_generated.type: basic
+```
+
+Change passwords at .env
+
+Add port 2055:2055/udp to agent apmserver docker compose to open port for Netflow
+
+```sh
+docker compose up setup
+```
+
+```sh
+docker compose -f docker-compose.yml -f extensions/fleet/fleet-compose.yml -f extensions/fleet/agent-apmserver-compose.yml up -d
+```
+
+Login at http://localhost:5601/
+
+Go to Management > Fleet > Agent Policies, choose Agent Policy APM Server
+Click "Add integration" button, find Netflow integration and fill in the form.
+Set host (0.0.0.0) and port (2055)
+
+Restart docker compose (go down, then up) if required.
+
+
 # Elastic stack (ELK) on Docker
 
 [![Elastic Stack version](https://img.shields.io/badge/Elastic%20Stack-8.17.3-00bfb3?style=flat&logo=elastic-stack)](https://www.elastic.co/blog/category/releases)

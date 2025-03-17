@@ -30,11 +30,9 @@ services:
       ELASTICSEARCH_PASSWORD: ${ELASTIC_PASSWORD:-}
       # (b) Enroll using a pre-generated service token
       #FLEET_SERVER_SERVICE_TOKEN: <service_token>
-    ports:
-      - 8220:8220
     hostname: fleet-server
     # Elastic Agent does not retry failed connections to Kibana upon the initial enrollment phase.
-    restart: on-failure
+    restart: always
     networks:
       - elk
     depends_on:

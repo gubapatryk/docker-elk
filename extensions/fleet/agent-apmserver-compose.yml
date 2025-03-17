@@ -28,10 +28,10 @@ services:
       # (b) Enroll using a pre-generated enrollment token
       #FLEET_ENROLLMENT_TOKEN: <enrollment_token>
     ports:
-      - 8200:8200
+      - 2055:2055/udp
     hostname: apm-server
     # Elastic Agent does not retry failed connections to Kibana upon the initial enrollment phase.
-    restart: on-failure
+    restart: always
     networks:
       - elk
     depends_on:
